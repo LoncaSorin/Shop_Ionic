@@ -122,12 +122,13 @@ const ProductsList: React.FC<RouteComponentProps> = ({ history }) => {
                     <IonSelectOption value="all products" >All products</IonSelectOption>
                 </IonSelect>
                 <IonList>
-                    {displayed && displayed.map(({ _id, description, price, size, availability, date, version, hasConflicts, lastModified, longitudine, latitudine}) => {
+                    {displayed && displayed.map(({ _id, description, price, size, availability, date, version, hasConflicts, lastModified, longitudine, latitudine, photo}) => {
                         return (
                             <Product key={_id} _id={_id} description={description} price={price}
                                      size={size} availability={availability} date={date}
                                      version={version} hasConflicts={hasConflicts} lastModified={lastModified}
                                      longitudine={longitudine} latitudine={latitudine}
+                                     photo={photo}
                                      onEdit={id => history.push(`/product/${id}`)}/>
                             );
                     })}

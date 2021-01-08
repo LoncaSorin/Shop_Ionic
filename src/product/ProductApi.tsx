@@ -42,9 +42,9 @@ export const createProduct: (token: string, product: ProductProps, networkStatus
     return networkStatus
         ? axios.post(productUrl,product,authConfig(token))
             .then(response => {
-                console.log(product);
+                //console.log(product);
                 saveProductLocal(response.data,true).then();
-                console.log(response.data);
+                //console.log(response.data);
                 return response.data;
             })
         : saveProductLocal(product,false);
@@ -61,8 +61,8 @@ export const updateProduct: (token: string, product: ProductProps, networkStatus
                         if (err.response?.status === 412) {
                             const conflict: ProductProps = err.response.data;
                             conflict.hasConflicts = true;
-                            console.log("CONFLITC!!");
-                            console.log(conflict);
+                            //console.log("CONFLITC!!");
+                            //console.log(conflict);
                             return Promise.resolve(conflict);
                         }
                         return saveProductLocal(product, false).then()
@@ -82,8 +82,8 @@ export const syncDataWithServer:(token:string) => Promise<ProductProps[]> = asyn
         }
         else{
             const conflict = await updateProduct(token,product,true);
-            console.log("CONFLICT SYNC");
-            console.log(product);
+            //console.log("CONFLICT SYNC");
+            //console.log(product);
             if(conflict.hasConflicts){
                 product.version = conflict.version;
                 conflictProducts.push(product,conflict);

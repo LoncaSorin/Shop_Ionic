@@ -10,4 +10,5 @@ export interface ProductProps {
     hasConflicts: boolean;
     longitudine: number;
     latitudine: number;
+    photo: string;
 }

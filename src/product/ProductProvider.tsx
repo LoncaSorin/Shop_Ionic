@@ -155,7 +155,7 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
                 : updateProduct(token,product,connectedNetworkStatus));
             //console.log("Unlucky");
             if(savedProduct.hasConflicts){
-                console.log("AICI");
+                //console.log("AICI");
                 dispatch({type: SAVE_PRODUCT_FAILED,payload: "412"});
                 product.version = savedProduct.version + 1;
                 savedProduct.version = savedProduct.version + 1;
