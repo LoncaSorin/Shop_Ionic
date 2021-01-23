@@ -27,6 +27,7 @@ import {AuthContext} from "../auth";
 import {ProductProps} from "./ProductProps";
 import {useNetwork} from "../core/UseNetState";
 import {useAppState} from "../core/UseAppStatus";
+import {createAnimation} from '@ionic/react';
 
 const log = getLogger('ProductsList');
 
@@ -102,6 +103,27 @@ const ProductsList: React.FC<RouteComponentProps> = ({ history }) => {
         return <Redirect to={{ pathname: '/login' }} />
     };
 
+    function simpleAnimation() {
+        const el = document.querySelector(".networkStatus");
+        if (el) {
+            const animation = createAnimation()
+                .addElement(el)
+                .duration(1000)
+                .direction("alternate")
+                .iterations(Infinity)
+                .keyframes([
+                    { offset: 0, transform: "scale(1)", opacity: "1" },
+                    {
+                        offset: 1,
+                        transform: "scale(0.5)",
+                        opacity: "0.5",
+                    },
+                ]);
+            animation.play();
+        }
+    }
+    useEffect(simpleAnimation, []);
+
     return (
         <IonPage>
             <IonHeader>
@@ -109,7 +131,7 @@ const ProductsList: React.FC<RouteComponentProps> = ({ history }) => {
                     <IonTitle>My Shop App</IonTitle>
                 </IonToolbar>
                 <IonToolbar color={color}>
-                    <IonTitle>Network connection: {msg}</IonTitle>
+                    <IonTitle class="networkStatus">Network connection: {msg}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
